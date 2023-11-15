@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.text {
+  @apply text-[#343F52]
+}
+.bg-3{
+  @apply text-[#D9E1E4]
+}
+
+.bg{
+  @apply bg-[#8AD1F2]
+}
+.bg-2{
+  @apply bg-[#E5F3FF]
+}
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spin {
+  -moz-appearance: textfield;
+}
