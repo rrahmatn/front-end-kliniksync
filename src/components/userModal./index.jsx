@@ -45,7 +45,6 @@ const UserModal = () => {
         const access_Token = localStorage.getItem("accessToken");
         const at = access_Token;
         if (cookie.name !== values.name) {
-          setIsDone(true)
           const response = await axios
             .patch(`http://127.0.0.1:3333/${cookie.role}`, values, {
               headers: {
@@ -65,12 +64,14 @@ const UserModal = () => {
           });
           document.getElementById("my_modal_1").close();
 
+          formik.setValues({
+            name : response.data.name
+          })
+
           setError(false);
           setToast(true);
           return response.data;
-        } else {
-          setIsDone(false)
-        }
+        } 
       } catch (err) {
         setError(true);
       }

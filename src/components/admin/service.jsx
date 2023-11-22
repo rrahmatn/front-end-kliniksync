@@ -4,11 +4,33 @@ import { IoIosRefreshCircle } from "react-icons/io";
 import axios from "axios";
 import { AddService } from "../adminModal/AddService";
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { FaTrashAlt } from "react-icons/fa";
+import DeleteClinic from "../deleteClinic";
 
 export const AdminService = () => {
   const [paraMasterService, setParaMasterService] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchInput, setSearchInput] = useState("");
+  const [error, setError] = useState("");
+  const [toast, setToast] = useState(false);
+
+  const [id, setId] = useState(0);
+  const [editedValues, setEditedValues] = useState([]);
+
+  useEffect(() => {
+    if (toast) {
+      setTimeout(() => {
+        setToast(false);
+      }, 1500);
+    }
+  }, [toast]);
+  useEffect(() => {
+    if (error !== "") {
+      setTimeout(() => {
+        setError("");
+      }, 1500);
+    }
+  }, [error]);
 
   const getMasterService = async () => {
     setLoading(true);
@@ -29,13 +51,74 @@ export const AdminService = () => {
       return response;
     } catch (err) {
       setLoading(false);
-      console.log(err);
     }
   };
 
   useEffect(() => {
     getMasterService();
   }, []);
+
+  const getMasterById = async () => {
+    const access_Token = localStorage.getItem("accessToken");
+    const at = access_Token;
+    try {
+      const response = await axios
+        .get(`http://127.0.0.1:3333/admin/masterservice/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${at}`,
+          },
+        })
+        .then((e) => {
+          setEditedValues(e.data.data);
+        });
+
+      return response;
+    } catch (err) {
+      setError(err.response.data.message);
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (id > 0) {
+      getMasterById();
+    }
+  }, [id]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const access_Token = localStorage.getItem("accessToken");
+    const at = access_Token;
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:3333/admin/masterservice/${id}`,
+        editedValues,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${at}`,
+          },
+        }
+      );
+
+      setToast(true);
+      return;
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const numericValue = name === "price" ? parseFloat(value) : value;
+
+    setEditedValues((prevValues) => ({
+      ...prevValues,
+
+      [name]: numericValue,
+    }));
+  };
 
   const table = () => {
     let filteredServices = paraMasterService;
@@ -70,6 +153,9 @@ export const AdminService = () => {
           <tr
             className="text text-sm hover:bg-violet-800 hover:text-white cursor-pointer"
             key={i}
+            onClick={() => {
+              setId(e.id);
+            }}
           >
             <th>{i + 1}</th>
             <th className="capitalize">{e.name}</th>
@@ -129,15 +215,126 @@ export const AdminService = () => {
               </thead>
               <tbody className="">{table()}</tbody>
             </table>
+            {paraMasterService.length < 1 ? (
+              <>
+                <span className="w-full h-10 text-center items-center flex flex-row justify-center">
+                  tidak ada data
+                </span>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         </div>
-        <div className="w-1/2 h-full bg-red-500">
-          <div className="w-full h-16 border-b-2 shadow-md flex flex-row justify-between px-2 items-center">
-            .
+        <div className="w-1/2 h-ful">
+          <div className="w-full h-16 border-b-2 shadow-sm flex flex-row text-lg justify-between px-3 items-center">
+            <p>Pendapatan dari layanan ini : </p>
+            <p>Rp. {editedValues.count}</p>
+          </div>
+          <div className="w-full px-4 flex flex-col items-center shadow-md py-3">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-3  h-full list-none"
+            >
+              <div className="w-full flex flex-col gap-3 items-end">
+                <li className="w-full flex flex-col  pr-4 ">
+                  <label htmlFor="name" name="name">
+                    Nama :
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    onChange={handleInputChange}
+                    value={editedValues.name}
+                    className="w-full h-8 ring-1 mt-2 px-3 rounded-md shadow-md"
+                    required
+                  />
+                </li>
+                <li className="w-full flex flex-col pr-4">
+                  <label htmlFor="type" name="type">
+                    Type :
+                  </label>
+                  <select
+                    id="type"
+                    name="type"
+                    onChange={handleInputChange}
+                    value={editedValues.type}
+                    className="w-full h-8 ring-1 mt-2 px-3 pr-5 rounded-md shadow-md"
+                    required
+                  >
+                    <option value="receptionist">Pilih Type</option>
+                    <option value="service">Layanan</option>
+                    <option value="medicine">Obat</option>
+                    <option value="registration">Registrasi</option>
+                  </select>
+                </li>
+                <li className="w-full flex flex-col pr-4 ">
+                  <label htmlFor="price" name="price">
+                    Harga :
+                  </label>
+                  <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    onChange={handleInputChange}
+                    value={editedValues.price}
+                    className="w-full h-8 ring-1 mt-2 px-3 rounded-md shadow-md no-spin"
+                    required
+                    onInput={(e) => {
+                      // Prevent input of 0
+                      if (e.currentTarget.value < 0) {
+                        e.currentTarget.value = "";
+                      }
+                    }}
+                  />
+                </li>
+              </div>
+              <div className="modal-action  flex flex-row justify-end items-center p-1 pr-2">
+                <button
+                  type="submit"
+                  className="btn btn-sm shadow-lg font-medium bg"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-error font-medium shadow-lg  btn-sm "
+                  onClick={() =>
+                    document.getElementById("delete_clinic").showModal()
+                  }
+                >
+                  <FaTrashAlt />
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
       <AddService />
+      {toast ? (
+        <div className="toast toast-top z-[1000] toast-center">
+          <div className="alert alert-success">
+            <span>Berhasil mengubah layanan</span>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {error !== "" ? (
+        <div className="toast z-[9999999] fixed toast-top toast-center">
+          <div className="alert alert-error">
+            <span>{error}</span>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      <DeleteClinic
+        id={id}
+        name={editedValues.name}
+        url={"admin/masterservice/delete"}
+      />
     </>
   );
 };

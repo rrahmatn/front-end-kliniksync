@@ -14,6 +14,7 @@ const ShowClinic = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const clinics = async () => {
+
     const access_Token = localStorage.getItem("accessToken");
     const at = access_Token;
     try {
@@ -54,7 +55,7 @@ const ShowClinic = () => {
           <h2 className=" text-md ">Data Klinik </h2>
         </div>
         <div className="w-full px-16 mb-3 shadow-sm py-1 border-b-2 flex flex-row justify-between  ">
-          <span className="w-1/3 border-2 border-separate flex flex-row justify-between px-2 items-center rounded-md shadow-md">
+          <span className="w-1/3  border-2 border-separate flex flex-row justify-between px-2 items-center rounded-md shadow-md">
             <input
               id="search"
               type="text"

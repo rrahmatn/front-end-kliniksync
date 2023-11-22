@@ -10,6 +10,7 @@ import UserModal from "../../components/userModal.";
 import { RiAdminFill } from "react-icons/ri";
 import { GrMoney } from "react-icons/gr";
 import {AdminService , Employes }from "../../components/admin/";
+import ClinicProfile from "../../components/admin/profile";
 
 
 const Admin = () => {
@@ -28,8 +29,8 @@ const Admin = () => {
       return <Employes />;
     } else if (page === "addClinic") {
       return <AdminService />;
-    }else if(page === "addAdmin"){
-      return <AddAdmin/>
+    }else if(page === "clinicProfile"){
+      return <ClinicProfile/>
     }
   };
   return (
@@ -60,9 +61,9 @@ const Admin = () => {
             </li>
             <li
               className={`w-full gap-2  px-4 py-4 flex flex-row items-center cursor-pointer hover:bg-violet-500 hover:text-white ${
-                page === "addAdmin" ? "bg-violet-800 text-white" : ""
+                page === "clinicProfile" ? "bg-violet-800 text-white" : ""
               }`}
-              onClick={() => setPage("addAdmin")}
+              onClick={() => setPage("clinicProfile")}
             >
               <RiAdminFill  className="text-xl" />
               <button className="w-full text-sm tracking-wider h-full text-left">Profile</button>

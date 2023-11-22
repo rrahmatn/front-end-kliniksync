@@ -24,6 +24,35 @@ const Navbar = () => {
     name: "k.l.e",
   });
 
+  useEffect(() => {
+    const fecth = async () => {
+      if (location !== "/auth" && !cookies.role) {
+        navigate("/auth");
+      }
+      if (cookies.refresh_token) {
+        await getRt();
+      }
+    };
+    fecth();
+  }, []);
+  const rt = cookies.refresh_token;
+  let timer;
+
+  useEffect(() => {
+    if (cookies.refresh_token) {
+      const iniRt = cookies.refresh_token;
+      setIslogin(true);
+      setIniUser(jwtDecode(iniRt));
+    } else {
+      navigate(`/auth`);
+    }
+    if (rt) {
+      timer = setInterval(async () => {
+        await getRt();
+      }, 1000 * 60 * 5);
+    }
+  }, []);
+
   const getRt = async () => {
     await axios
       .get(
@@ -37,40 +66,11 @@ const Navbar = () => {
         }
       )
       .then((res) => {
+        clearInterval(timer);
         localStorage.setItem("accessToken", res.data.access_token);
         setAccessToken(res.data.access_token);
       });
   };
-
-  useEffect(() => {
-    const fecth = async () => {
-      if (location !== "/auth" && !cookies.role) {
-        navigate("/auth");
-      }
-      if (cookies.refresh_token) {
-        await getRt();
-      }
-    };
-    fecth();
-  }, []);
-  const rt = cookies.refresh_token;
-  useEffect(() => {
-    let timer;
-    if (cookies.refresh_token) {
-      const iniRt = cookies.refresh_token;
-      setIslogin(true);
-      setIniUser(jwtDecode(iniRt));
-    } else {
-      navigate(`/auth`);
-    }
-    if (rt) {
-      timer = setInterval(async () => {
-        await getRt();
-      }, 1000 * 60 * 60 * 10);
-    }
-
-    return () => clearInterval(timer);
-  }, []);
 
   // console.log(cookies);
 

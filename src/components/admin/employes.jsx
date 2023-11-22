@@ -19,15 +19,12 @@ export const Employes = () => {
     const access_Token = localStorage.getItem("accessToken");
     const at = access_Token;
     try {
-      const response = await axios.get(
-        `http://127.0.0.1:3333/admin/employes`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${at}`,
-          },
-        }
-      );
+      const response = await axios.get(`http://127.0.0.1:3333/admin/employes`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${at}`,
+        },
+      });
       setEmployes(response.data.data.employes[0]);
 
       return response;
@@ -69,15 +66,20 @@ export const Employes = () => {
             </label>
           </span>
           <span className="flex flex-row gap-9  items-center px-5">
-
-          <label htmlFor="addEmploye" className="btn bg btn-sm font-medium text-md" onClick={()=>document.getElementById("addEmploye").showModal()}>Tambah karyawan</label>
-          <span
-            className=" text-2xl w-fit h-fit item-center justify-center cursor-pointer"
-            onClick={clinics}
+            <label
+              htmlFor="addEmploye"
+              className="btn bg btn-sm font-medium text-md"
+              onClick={() => document.getElementById("addEmploye").showModal()}
             >
-            <IoIosRefreshCircle className="text-2xl shadow-md rounded-full" />
+              Tambah karyawan
+            </label>
+            <span
+              className=" text-2xl w-fit h-fit item-center justify-center cursor-pointer"
+              onClick={clinics}
+            >
+              <IoIosRefreshCircle className="text-2xl shadow-md rounded-full" />
+            </span>
           </span>
-              </span>
         </div>
         <div className="max-h-96 w-11/12 shadow-md overflow-y-auto overflow-x-hidden">
           <table className="table  border-colapse bg-3 text px-1">
@@ -115,12 +117,19 @@ export const Employes = () => {
               })}
             </tbody>
           </table>
+          {filteredEmployes.length < 1 ? (
+            <>
+              <span className="w-full h-10 text-center items-center flex flex-row justify-center">
+                tidak ada data
+              </span>
+            </>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <DetailEmploye role={role} id={id} />
-      <AddEmployeModal/>
-
+      <AddEmployeModal />
     </>
   );
 };
-

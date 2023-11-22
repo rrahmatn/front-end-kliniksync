@@ -2,6 +2,7 @@ import axios from "axios";
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 
+
 export const AddService = () => {
   const [error, setError] = useState("");
   const [toast, setToast] = useState(false);
@@ -19,7 +20,7 @@ export const AddService = () => {
     if (error !== "") {
       setTimeout(() => {
         setError("");
-      }, 2000);
+      }, 3500);
     }
   }, [error]);
 
@@ -106,6 +107,7 @@ export const AddService = () => {
                     <option value="receptionist">Pilih Type</option>
                     <option value="service">Layanan</option>
                     <option value="medicine">Obat</option>
+                    <option value="registration">Registrasi</option>
                   </select>
                 </li>
                 <li className="w-full flex flex-col pr-4 ">

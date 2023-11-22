@@ -102,9 +102,9 @@ const Auth = () => {
 
   return (
     <>
-      <div className="w-full overflow-x-auto h-fit flex flex-row text">
+      <div className="w-full overflow-x-auto h-screen flex flex-row text">
         <figure className="hidden md:w-3/5 h-full m-auto  md:flex items-center justify-center">
-          <img src={Hero} alt="hero" className="h-full m-auto w-fit" />
+          <img src={Hero} alt="hero" className="h-5/6 m-auto w-fit" />
         </figure>
         <section className="w-fit md:w-2/5 h-fit ">
           <div className="w-fit h-full items-center md:items-start flex flex-col pt-32 pb-10  justify-around ml-10">
