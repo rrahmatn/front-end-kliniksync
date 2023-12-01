@@ -41,6 +41,7 @@ const Navbar = () => {
   useEffect(() => {
     if (cookies.refresh_token) {
       const iniRt = cookies.refresh_token;
+      getRt()
       setIslogin(true);
       setIniUser(jwtDecode(iniRt));
     } else {

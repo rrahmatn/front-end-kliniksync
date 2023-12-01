@@ -8,6 +8,8 @@ import { parseISO } from "date-fns";
 import { useFormik } from "formik";
 import AddPatient from "../../components/receptionist/addPatient";
 import AddQueue from "../../components/receptionist/addQueue";
+import { useNavigate } from "react-router";
+import { useCookies } from "react-cookie";
 
 const Receptionist = () => {
   const [selected, setSelected] = useState(false);
@@ -19,6 +21,18 @@ const Receptionist = () => {
   const [toast, setToast] = useState("");
   const [toast2, setToast2] = useState(false);
   const [queue, setQueue] = useState(0);
+
+  const navigate = useNavigate();
+  const [cookie] = useCookies(["role"]);
+  useEffect(() => {
+    if(!cookie.role || cookie.role === undefined){
+      navigate(`/auth`);
+    }else{
+      if (cookie.role !== "receptionist") {
+        navigate(`/${cookie.role}`);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (toast2) {
@@ -103,6 +117,7 @@ const Receptionist = () => {
       if (response.data && response.data.data) {
         const formattedPatients = response.data.data.map((patient) => ({
           id: patient.id,
+          nik : patient.nik,
           name: patient.name,
           phone: patient.phone,
           birth_date: new Date(patient.birth_date).toISOString().split("T")[0],
@@ -113,6 +128,7 @@ const Receptionist = () => {
         setPatients(formattedPatients);
         setToast(true);
         formik.setValues({
+          nik: "",
           name: "",
           phone: "",
           gender: "",
@@ -153,6 +169,7 @@ const Receptionist = () => {
 
   const formik = useFormik({
     initialValues: {
+      nik: "",
       name: "",
       phone: "",
       gender: "",
@@ -169,6 +186,7 @@ const Receptionist = () => {
         .split("T")[0];
 
       const body = {
+        nik : values.nik,
         name: values.name,
         phone: values.phone,
         birth_date: formattedDate,
@@ -195,6 +213,7 @@ const Receptionist = () => {
         setToast2(true);
 
         formik.setValues({
+          nik : "",
           name: "",
           phone: "",
           birth_date: "",
@@ -247,7 +266,9 @@ const Receptionist = () => {
                     setSelected(true);
                     setPatientName(e.name);
                     setId(e.id);
+                    console.log(e)
                     formik.setValues({
+                      nik: e.nik,
                       name: e.name,
                       birth_date: e.birth_date,
                       phone: e.phone,
@@ -293,6 +314,20 @@ const Receptionist = () => {
               >
                 <div className="w-full h-fit flex flex-row px-4">
                   <div className="w-1/2 flex flex-col gap-3 items-end">
+                    <li className="w-full flex flex-col  pr-4 ">
+                      <label htmlFor="nik" name="nik">
+                        Nik :
+                      </label>
+                      <input
+                        type="text"
+                        id="nik"
+                        name="nik"
+                        onChange={formik.handleChange}
+                        value={formik.values.nik}
+                        className="w-full h-8 ring-1 mt-2 px-3 rounded-md shadow-md"
+                        required
+                      />
+                    </li>
                     <li className="w-full flex flex-col  pr-4 ">
                       <label htmlFor="name" name="name">
                         Nama :
@@ -361,7 +396,7 @@ const Receptionist = () => {
                       </select>
                     </li>
 
-                    <li className="w-full flex flex-col pr-4 ">
+                    <li className="w-full flex flex-col pr-4 mt-2">
                       <label htmlFor="address" name="address">
                         Alamat :
                       </label>
@@ -371,7 +406,7 @@ const Receptionist = () => {
                         value={formik.values.address}
                         id="address"
                         name="address"
-                        className="w-full h-28 p-2 ring-1 mt-2 px-3 rounded-md shadow-md"
+                        className="w-full h-44 p-2 ring-1 mt-2 px-3 rounded-md shadow-md"
                         required
                       />
                     </li>

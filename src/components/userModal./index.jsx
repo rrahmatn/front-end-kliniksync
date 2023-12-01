@@ -15,7 +15,9 @@ const UserModal = () => {
   const [showPassword3, setShowPassword3] = useState(false);
   const [showPassword4, setShowPassword4] = useState(false);
   const [toast, setToast] = useState(false);
+  const [toast2, setToast2] = useState(false);
   const [error, setError] = useState(false);
+  const [error2, setError2] = useState(false);
   const [cookie, setCookie, removeCookies] = useCookies([
     "refresh_token",
     "role",
@@ -26,14 +28,56 @@ const UserModal = () => {
 
   const [name, setName] = useState(nameFormCookies);
 
-  const token = localStorage.getItem("accessToken");
+  useEffect(()=>{
+    if (error2) {
+      setTimeout(() => setError2(false), 3000);
+    }
+
+  },[error2])
 
   useEffect(() => {
     if (toast) {
-      setTimeout(() => setToast(false), 5000);
+      setTimeout(() => setToast(false), 3000);
     }
   }, [toast]);
+  useEffect(() => {
+    if (toast2) {
+      setTimeout(() => setToast2(false), 3000);
+    }
+  }, [toast2]);
 
+  const formikPassword = useFormik({
+    initialValues: {
+      oldPassword: "",
+      newPassword: "",
+      confPassword: "",
+    },
+    onSubmit: async (values) => {
+      try {
+        const access_Token = localStorage.getItem("accessToken");
+        const at = access_Token;
+          const response = await axios
+            .patch(
+              `http://127.0.0.1:3333/${cookie.role}/changepassword`,
+              values,
+              {
+                headers: {
+                  "Content-Type": "application/json", // Adjust the content type based on your API requirements
+                  Authorization: `Bearer ${at}`,
+                },
+              }
+            )
+            .then((res) => res.data);
+          document.getElementById("my_modal_1").close();
+
+          setError2(false);
+          setToast(true);
+      } catch (err) {
+        setError2(true);
+        console.log(err);
+      }
+    },
+  });
   const formik = useFormik({
     initialValues: {
       name: name,
@@ -65,13 +109,13 @@ const UserModal = () => {
           document.getElementById("my_modal_1").close();
 
           formik.setValues({
-            name : response.data.name
-          })
+            name: response.data.name,
+          });
 
           setError(false);
           setToast(true);
           return response.data;
-        } 
+        }
       } catch (err) {
         setError(true);
       }
@@ -83,7 +127,17 @@ const UserModal = () => {
       <dialog id="my_modal_1" className="modal">
         <div className="modal-box w-fit flex text flex-col">
           {changePassword ? (
-            <form action="" className="flex flex-col gap-3 list-none">
+            <form
+              onSubmit={formikPassword.handleSubmit}
+              className="flex flex-col gap-3 list-none"
+            >
+              {error2 ? (
+                <p className="text-md text-error w-full text-center ">
+                  password salah
+                </p>
+              ) : (
+                ""
+              )}
               <li>
                 <label htmlFor="oldPassword" name="oldPassword">
                   Password Lama
@@ -92,6 +146,8 @@ const UserModal = () => {
                   <input
                     type={!showPassword ? "password" : "text"}
                     id="oldPassword"
+                    value={formikPassword.values.oldPassword}
+                    onChange={formikPassword.handleChange}
                     className="w-80 h-full  focus:outline-none"
                     required
                   />
@@ -115,6 +171,8 @@ const UserModal = () => {
                   <input
                     type={!showPassword2 ? "password" : "text"}
                     id="newPassword"
+                    value={formikPassword.values.newPassword}
+                    onChange={formikPassword.handleChange}
                     className="w-80 h-full  focus:outline-none"
                     required
                   />
@@ -138,6 +196,8 @@ const UserModal = () => {
                   <input
                     type={!showPassword3 ? "password" : "text"}
                     id="confPassword"
+                    value={formikPassword.values.confPassword}
+                    onChange={formikPassword.handleChange}
                     className="w-80 h-full focus:outline-none"
                     required
                   />
@@ -156,14 +216,30 @@ const UserModal = () => {
               <span className="w-full px-4 flex flex-row gap-2 items-center justify-between">
                 <button
                   className="btn btn-warning shadow-sm w-1/2"
+                  type="button"
                   onClick={(e) => {
                     setChangePassword(!changePassword);
                     e.preventDefault();
+                    setError(false);
                   }}
                 >
                   Edit Profile
                 </button>
-                <button className="btn bg w-1/2 shadow-sm" type="submit">
+                <button
+                  className="btn bg w-1/2 shadow-sm"
+                  type="submit"
+                  onClick={() => {
+                    if (!error) {
+                      setTimeout(() => {
+                        formikPassword.handleReset((e) => {
+                          e.oldPassword;
+                          e.newPassword;
+                          e.confPassword;
+                        });
+                      }, 300);
+                    }
+                  }}
+                >
                   Ubah
                 </button>
               </span>
@@ -223,7 +299,6 @@ const UserModal = () => {
                     name="password"
                     id="password"
                     className={` w-80 h-full   focus:outline-none `}
-                    
                   />
                   <button
                     className="w-auto h-full flex items-center justify-center text-xl"
@@ -246,6 +321,7 @@ const UserModal = () => {
                   onClick={(e) => {
                     setChangePassword(!changePassword);
                     e.preventDefault();
+                    setError(false);
                   }}
                 >
                   Ganti Password
@@ -278,6 +354,7 @@ const UserModal = () => {
                 });
                 setChangePassword(false);
                 setError(false);
+                setError(false);
               }}
               className={`btn btn-sm btn-circle btn-ghost absolute right-2 top-2 `}
             >
@@ -290,6 +367,15 @@ const UserModal = () => {
         <div className="toast toast-top z-[1000] toast-center">
           <div className="alert alert-success">
             <span>Berhasil mengubah data</span>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {toast2 ? (
+        <div className="toast toast-top z-[1000] toast-center">
+          <div className="alert alert-success">
+            <span>Berhasil mengubah password</span>
           </div>
         </div>
       ) : (

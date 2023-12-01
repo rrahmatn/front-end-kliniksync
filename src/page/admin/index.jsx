@@ -14,13 +14,17 @@ import ClinicProfile from "../../components/admin/profile";
 
 
 const Admin = () => {
+  const [page, setPage] = useState("showEmpoye");
+  
   const navigate = useNavigate();
   const [cookie] = useCookies(["role"]);
-  const [page, setPage] = useState("showEmpoye");
-
   useEffect(() => {
-    if (cookie.role !== "Admin") {
-      navigate(`/${cookie.role}`);
+    if(!cookie.role || cookie.role === undefined){
+      navigate(`/auth`);
+    }else{
+      if (cookie.role !== "admin") {
+        navigate(`/${cookie.role}`);
+      }
     }
   }, []);
 

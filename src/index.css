@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Poppins&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -30,4 +31,8 @@
 
 .no-spin {
   -moz-appearance: textfield;
+}
+
+.nota{
+  font-family: 'Montserrat', sans-serif;
 }

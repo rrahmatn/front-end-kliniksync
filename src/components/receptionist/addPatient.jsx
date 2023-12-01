@@ -24,6 +24,7 @@ const AddPatient = () => {
 
   const formik = useFormik({
     initialValues: {
+      nik: "",
       name: "",
       phone: "",
       gender: "",
@@ -40,6 +41,7 @@ const AddPatient = () => {
         .split("T")[0];
 
       const body = {
+        nik : values.nik,
         name: values.name,
         phone: values.phone,
         birth_date: formattedDate,
@@ -62,6 +64,7 @@ const AddPatient = () => {
         setToast2(true);
 
         formik.setValues({
+          nik: "",
           name: "",
           phone: "",
           birth_date: "",
@@ -90,6 +93,20 @@ const AddPatient = () => {
           >
             <div className="w-full h-fit flex flex-row px-4">
               <div className="w-1/2 flex flex-col gap-3 items-end">
+                <li className="w-full flex flex-col  pr-4 ">
+                  <label htmlFor="nik" name="nik">
+                    nik :
+                  </label>
+                  <input
+                    type="text"
+                    id="nik"
+                    name="nik"
+                    onChange={formik.handleChange}
+                    value={formik.values.nik}
+                    className="w-full h-8 ring-1 mt-2 px-3 rounded-md shadow-md"
+                    required
+                  />
+                </li>
                 <li className="w-full flex flex-col  pr-4 ">
                   <label htmlFor="name" name="name">
                     Nama :
@@ -151,7 +168,7 @@ const AddPatient = () => {
                     <option value="perempuan">Perempuan</option>
                   </select>
                 </li>
-                <li className="w-full flex flex-col pr-4 ">
+                <li className="w-full flex flex-col pr-4 mt-5">
                   <label htmlFor="address" name="address">
                     Alamat :
                   </label>
@@ -161,7 +178,7 @@ const AddPatient = () => {
                     value={formik.values.address}
                     id="address"
                     name="address"
-                    className="w-full h-28 p-2 ring-1 mt-2 px-3 rounded-md shadow-md"
+                    className="w-full h-40 p-2 ring-1 mt-2 px-3 rounded-md shadow-md"
                     required
                   />
                 </li>

@@ -21,6 +21,8 @@
     "jotai": "^2.5.1",
     "jwt-decode": "^4.0.0",
     "postcss": "^8.4.31",
+    "print-js": "^1.6.0",
+    "print-pdf": "^0.2.6",
     "react": "^18.2.0",
     "react-auth-kit": "^3.0.0-alpha.35",
     "react-cookie": "^6.1.1",
@@ -28,7 +30,8 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",
     "react-router": "^6.18.0",
-    "react-router-dom": "^6.18.0"
+    "react-router-dom": "^6.18.0",
+    "react-to-print": "^2.14.15"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

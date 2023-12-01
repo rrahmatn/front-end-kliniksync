@@ -6,6 +6,7 @@ const AddServicePatient = ({
   medicalHistoryId,
   patientName,
   serviceName,
+  role
 }) => {
   const addServicePatient = async () => {
     if (masterServiceId !== 0 || medicalHistoryId !== 0) {
@@ -17,7 +18,7 @@ const AddServicePatient = ({
       };
       try {
         const response = await axios.post(
-          `http://127.0.0.1:3333/doctor/service`,
+          `http://127.0.0.1:3333/${role}/service`,
           body,
           {
             headers: {

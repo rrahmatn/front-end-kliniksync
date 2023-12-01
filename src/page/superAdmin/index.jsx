@@ -14,15 +14,19 @@ import { RiAdminFill } from "react-icons/ri";
 import AddSuperAdmin from "../../components/superAdmin/addSuperAdmin";
 
 const SuperAdmin = () => {
+  const [page, setPage] = useState("showClinic");
   const navigate = useNavigate();
   const [cookie] = useCookies(["role"]);
-  const [page, setPage] = useState("showClinic");
-
   useEffect(() => {
-    if (cookie.role !== "superadmin") {
-      navigate(`/${cookie.role}`);
+    if(!cookie.role || cookie.role === undefined){
+      navigate(`/auth`);
+    }else{
+      if (cookie.role !== "superadmin") {
+        navigate(`/${cookie.role}`);
+      }
     }
   }, []);
+
 
   const thisPage = () => {
     if (page === "showClinic") {

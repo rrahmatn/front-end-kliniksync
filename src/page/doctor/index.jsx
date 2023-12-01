@@ -14,6 +14,7 @@ import { parseISO } from "date-fns";
 import { IoIosAddCircle } from "react-icons/io";
 import { MdManageSearch } from "react-icons/md";
 import AddServicePatient from "../../components/doctor/addServicePatient";
+import { useFormik } from "formik";
 
 const Doctor = () => {
   const navigate = useNavigate();
@@ -46,17 +47,22 @@ const Doctor = () => {
   const [patientMSId, setPatientMSId] = useState(0);
 
   useEffect(() => {
-    if (cookie.role !== "doctor") {
-      navigate(`/${cookie.role}`);
+    if(!cookie.role || cookie.role === undefined){
+      navigate(`/auth`);
+    }else{
+      if (cookie.role !== "doctor") {
+        navigate(`/${cookie.role}`);
+      }
     }
   }, []);
+ 
 
   useEffect(() => {
     getQueue();
     getStatus();
     getMasterService();
   }, []);
-  
+
   useEffect(() => {
     getQueue();
     getStatus();
@@ -74,10 +80,9 @@ const Doctor = () => {
           },
         })
         .then((res) => {
-          // console.log(res.data.queue);
           setQueue(res.data.queue.length);
           setNext(res.data.queue[nextId]);
-          setPatientMSId(res.data.queue[0].id);
+          setPatientMSId(res.data.queue[0].data.id);
         });
       // console.log(next);
       return response;
@@ -163,22 +168,66 @@ const Doctor = () => {
     setFilterMS(filtered);
   }, [searchTerm, masterService]);
 
+  const formik = useFormik({
+    initialValues: {
+      medicine: "",
+      note: "",
+    },
 
+    onSubmit: async (values) => {
+      const access_Token = localStorage.getItem("accessToken");
+      const at = access_Token;
 
-  
+      try {
+        const response = await axios
+          .patch(
+            `http://127.0.0.1:3333/doctor/medicalhistory/${patientMSId}`,
+            values,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${at}`,
+              },
+            }
+          )
+          .then((res) => {
+            setNextId(0);
+            setPatient({
+              name: "",
+              birth_date: "",
+              address: "",
+              gender: "",
+            });
+            setMedicalHistory([]);
+            setPatientMSId(0)
+            document.getElementById("getDone").close();
+            setNext({
+              id: 0,
+              name: " ",
+            });
+          }).then(async ()=> await getQueue())
 
+        
+        formik.resetForm();
+
+        return response;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  });
 
   return (
     <>
       <div className="w-full h-screen flex pt-16 flex-col">
-        <nav className="w-full h-14 border-b-2 rounded pt-3 px-3 flex items-center flex-row gap-3 justify-between">
+        <nav className="w-full h-14 rounded pt-3 px-3 flex items-center flex-row gap-3 justify-between">
           <div className="w-fit h-full flex flex-row items-center gap-2">
             <div className="w-7 h-7  shadow-md bg-amber-400 text-gray-900 text-sm items-center justify-center flex rounded-full text-center tracking-wider">
               {queue ? queue - nextId : "0"}
             </div>
             {next ? (
               <>
-                <div className="w-fit h-fit text-center text-sm italic tracking-wider">
+                <div className="w-fit h-fit text-center text-sm italic tracking-wider badge bg p-1 px-2">
                   {next.name ? next.name : " "}
                 </div>
                 {nextId !== 0 ? (
@@ -238,26 +287,37 @@ const Doctor = () => {
               <span>{patient.name ? patient.name : "- -"}</span>
             </nav>
             <div className="w-full h-fit flex gap-2 mb-14 flex-col overflow-y-auto p-2 border-b-gray-700">
-             {medicalHistory.length > 0 ? (<> {medicalHistory.map((e, i) => {
-                const tanggal = e.created_at.split("T");
-                return (
-                  <span
-                    key={i}
-                    className="w-full h-14 shadow-md shrink-0 px-3 border-2 flex flex-row items-center justify-between rounded-md"
-                  >
-                    <p className="text-sm italic"> {tanggal[0]}</p>
-                    <label
-                      htmlFor="getMedicalHistory"
-                      onClick={() => {
-                        setMedicalHistoryId(e.id);
-                      }}
-                      className="text-sm  shadow-sm btn btn-xs font-medium bg hover:bg-violet-400 hover:text-zinc-900"
-                    >
-                      detail
-                    </label>
-                  </span>
-                );
-              })}</>) : <span className="text-xs w-full text-center mt-5">{patient.name === "" ? '' : "pasien tidak pernah berobat pada klinik yang berlangganan pada kliniksync"}</span>}
+              {medicalHistory.length > 0 ? (
+                <>
+                  {" "}
+                  {medicalHistory.map((e, i) => {
+                    const tanggal = e.created_at.split("T");
+                    return (
+                      <span
+                        key={i}
+                        className="w-full h-14 shadow-md shrink-0 px-3 border-2 flex flex-row items-center justify-between rounded-md"
+                      >
+                        <p className="text-sm italic"> {tanggal[0]}</p>
+                        <label
+                          htmlFor="getMedicalHistory"
+                          onClick={() => {
+                            setMedicalHistoryId(e.id);
+                          }}
+                          className="text-sm  shadow-sm btn btn-xs font-medium bg hover:bg-violet-400 hover:text-zinc-900"
+                        >
+                          detail
+                        </label>
+                      </span>
+                    );
+                  })}
+                </>
+              ) : (
+                <span className="text-xs w-full text-center mt-5">
+                  {patient.name === ""
+                    ? ""
+                    : "pasien tidak pernah berobat pada klinik yang berlangganan pada kliniksync"}
+                </span>
+              )}
             </div>
           </aside>
           <aside className="w-1/2 h-full  flex flex-col">
@@ -315,20 +375,21 @@ const Doctor = () => {
                     <thead className="sticky -top-1  border-b-2 text-bold text-black text-md m-0 bg-white  ">
                       <tr className="border-b-2">
                         <th className="p-2 w-1/12 border-b-2 px-4">No.</th>
-                        <th className="p-2 w-/full border-b-2 px-4">
-                          Layanan
+                        <th className="p-2 w-/full border-b-2 px-4">Layanan</th>
+                        <th className="p-2 w-1/4 border-b-2 px-4">
+                          {patient.name !== "" ? "Tambahkan" : "Harga"}
                         </th>
-                        <th className="p-2 w-1/4 border-b-2 px-4">{patient.name !== "" ? "Tambahkan" : "Harga"}</th>
                       </tr>
                     </thead>
                     <tbody>
                       {filteredMS.map((e, i) => {
                         return (
-                            <tr className="text" key={i + 1}>
-                              <th>{i + 1}</th>
-                              <td className="capitalize">{e.name}</td>
-                              <td className="capitalize ">
-                               {patient.name !==  "" ? ( <label
+                          <tr className="text" key={i + 1}>
+                            <th>{i + 1}</th>
+                            <td className="capitalize">{e.name}</td>
+                            <td className="capitalize ">
+                              {patient.name !== "" ? (
+                                <label
                                   onClick={() => {
                                     setServiceId(e.id);
                                     setService(e.name);
@@ -337,9 +398,12 @@ const Doctor = () => {
                                   className="h-8 bg cursor-pointer w-8 mx-auto flex items-center justify-center rounded-full text-2xl p-1 hover:bg-violet-400 hover:text-zinc-900"
                                 >
                                   <IoIosAddCircle />
-                                </label>) : (<p>{e.price}</p>) }
-                              </td>
-                            </tr>
+                                </label>
+                              ) : (
+                                <p>{e.price}</p>
+                              )}
+                            </td>
+                          </tr>
                         );
                       })}
                     </tbody>
@@ -355,11 +419,16 @@ const Doctor = () => {
                   Tinggalkan catatan dan obat
                 </nav>
                 <div className="w-full h-fit flex py-3 flex-col">
-                  <form className="w-full h-fit list-none gap-2 pl-4" action="">
+                  <form
+                    className="w-full h-fit list-none gap-2 pl-4"
+                    onSubmit={formik.handleSubmit}
+                  >
                     <li className="w-11/12 flex flex-col gap-1">
                       <label htmlFor="note">Catatan:</label>
                       <textarea
                         name="note"
+                        onChange={formik.handleChange}
+                        value={formik.values.note}
                         className="text-sm shadow-md border w-11/12 p-2 h-32 placeholder:lowercase"
                         id="note"
                         placeholder={`masukan catatan untuk ${patient.name}`}
@@ -370,6 +439,8 @@ const Doctor = () => {
                       <label htmlFor="medicine">Obat:</label>
                       <textarea
                         name="medicine"
+                        onChange={formik.handleChange}
+                        value={formik.values.medicine}
                         className="text-sm shadow-md border w-11/12 p-2 h-32 placeholder:lowercase"
                         id="medicine"
                         placeholder={`masukan kebutuhan obat untuk ${patient.name}`}
@@ -377,13 +448,42 @@ const Doctor = () => {
                       />
                     </li>
 
-                    <button
-                      type="submit"
+                    <label
+                      htmlFor="getDone"
+                      onClick={() =>
+                        document.getElementById("getDone").showModal()
+                      }
                       className="w-5/6 my-3 btn bg hover:bg-violet-400 hover:text-zinc-900 "
                     >
                       {" "}
                       Selesai
-                    </button>
+                    </label>
+                    <dialog id="getDone" className="modal">
+                      <div className="modal-box p-4 gap-3">
+                        <span className="font-medium text-lg flex flex-col gap-3 px-1">
+                          <p>Anda yakin sudah selesai untuk pemeriksaan {patient.name} ?</p>
+
+                          
+                        </span>
+                        <div className="w-full flex flex-row gap-3 mt-3 justify-end -mb-2">
+                          <button
+                            onClick={() =>
+                              document.getElementById("getDone").close()
+                            }
+                            type="button"
+                            className="btn btn-sm font-medium bg-warning"
+                          >
+                            Batal
+                          </button>
+                          <button
+                            type="submit"
+                            className="btn btn-sm font-medium bg-red-500"
+                          >
+                            Lanjutkan
+                          </button>
+                        </div>
+                      </div>
+                    </dialog>
                   </form>
                 </div>
               </>
@@ -404,6 +504,7 @@ const Doctor = () => {
         serviceName={service}
         masterServiceId={serviceId}
         medicalHistoryId={patientMSId}
+        role={'doctor'}
       />
     </>
   );
