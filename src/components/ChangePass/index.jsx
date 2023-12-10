@@ -136,7 +136,7 @@ const ChangePass = ({ id , url}) => {
             <div className="modal-action ">
               <button
                 type="submit"
-                className="btn btn-error btn-sm font-medium"
+                className="btn bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED] btn-sm font-medium"
                 onClick={() => {
                   setTimeout(() => {
                     formik.handleReset((e) => {
@@ -146,12 +146,12 @@ const ChangePass = ({ id , url}) => {
                   }, 300);
                 }}
               >
-                Ganti Password
+                Ubah Password
               </button>
 
               <button
                 type="button"
-                className="btn btn-warning btn-sm font-medium"
+                className="btn bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] btn-sm font-medium"
                 onClick={() =>
                   document.getElementById("change_password").close()
                 }

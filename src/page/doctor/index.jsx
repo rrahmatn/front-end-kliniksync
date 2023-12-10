@@ -1,5 +1,5 @@
 import Navbar from "../../components/navbar";
-import UserModal from "../../components/userModal.";
+import UserModal from "../../components/userModal";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";

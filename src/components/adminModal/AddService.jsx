@@ -104,7 +104,7 @@ export const AddService = () => {
                     className="w-full h-8 ring-1 mt-2 px-3 pr-5 rounded-md shadow-md"
                     required
                   >
-                    <option value="receptionist">Pilih Type</option>
+                    <option value="default">Pilih Type</option>
                     <option value="service">Layanan</option>
                     <option value="medicine">Obat</option>
                     <option value="registration">Registrasi</option>
@@ -134,13 +134,13 @@ export const AddService = () => {
               <div className="modal-action  flex flex-row justify-end items-center p-1 pr-2">
                 <button
                   type="submit"
-                  className="btn btn-sm shadow-lg font-medium bg"
+                  className="btn btn-sm shadow-lg font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                 >
                   Tambah
                 </button>
                 <button
                   type="button"
-                  className="btn btn-error font-medium shadow-lg  btn-sm "
+                  className="btn bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] font-medium shadow-lg  btn-sm "
                   onClick={() => document.getElementById("addService").close()}
                 >
                   Batal

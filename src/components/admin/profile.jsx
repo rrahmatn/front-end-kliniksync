@@ -120,7 +120,7 @@ const ClinicProfile = () => {
                 <div className="w-1/2 flex flex-col gap-3 items-end">
                   <li className="w-full flex flex-col  pr-4 ">
                     <label htmlFor="ininamaklinik" name="name">
-                      Nama Klnik :
+                      Nama Klinik :
                     </label>
                     <input
                       type="text"
@@ -148,7 +148,7 @@ const ClinicProfile = () => {
                   </li>
                   <li className="w-full flex flex-col pr-4 ">
                     <label htmlFor="iniemailclinic" name="email">
-                      email :
+                      Email :
                     </label>
                     <input
                       type="text"
@@ -198,7 +198,7 @@ const ClinicProfile = () => {
               <div className="modal-action   flex flex-row justify-end items-center pt-0 p-3 pr-7">
                 <button
                   type="button"
-                  className="btn btn-error font-medium shadow-lg  btn-sm "
+                  className="btn bg-[#FFFFFF] text-[#8AD1F2] border-[#8AD1F2] hover:bg-[#E5F3FF] font-medium shadow-lg btn-sm "
                   onClick={() =>
                     document.getElementById("changePasswordClinic").showModal()
                   }
@@ -207,9 +207,9 @@ const ClinicProfile = () => {
                 </button>
                 <button
                   type="submit"
-                  className="btn btn-sm shadow-lg font-medium bg"
+                  className="btn bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED] font-medium shadow-lg btn-sm"
                 >
-                  Edit
+                  Edit Profile
                 </button>
               </div>
             </form>
@@ -242,7 +242,7 @@ const ClinicProfile = () => {
                   <td className="w-1/2 capitalize">{detail.receptionist + detail.doctors + detail.pharmacy + detail.cashier}</td>
                 </tr>
                 <tr className="h-12">
-                  <td className="w-1/3 px-1 "> Resepsionis</td>
+                  <td className="w-1/3 px-1 "> Resepsionis </td>
                   <td className="w-1/12 ">:</td>
                   <td className="w-1/2 lowercase">{detail.receptionist}</td>
                 </tr>
@@ -276,7 +276,7 @@ const ClinicProfile = () => {
       {toast ? (
         <div className="toast toast-top z-[1000] toast-center">
           <div className="alert alert-success">
-            <span>Berhasil menggubah data klinik</span>
+            <span>Berhasil mengubah data klinik</span>
           </div>
         </div>
       ) : (

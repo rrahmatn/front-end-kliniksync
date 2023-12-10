@@ -9,7 +9,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import AddClinic from "../../components/superAdmin/addClinic";
 import ShowClinic from "../../components/superAdmin/showClinic";
 import Logout from "../../components/logout";
-import UserModal from "../../components/userModal.";
+import UserModal from "../../components/userModal";
 import { RiAdminFill } from "react-icons/ri";
 import AddSuperAdmin from "../../components/superAdmin/addSuperAdmin";
 

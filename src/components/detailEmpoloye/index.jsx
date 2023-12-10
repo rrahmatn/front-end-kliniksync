@@ -40,6 +40,10 @@ const DetailEmploye = ({ id, role }) => {
     return false;
   };
 
+  const triggerChange = () => {
+    getEmploye()
+  }
+
   useEffect(() => {
     if (id > 0) {
       getEmploye();
@@ -48,8 +52,8 @@ const DetailEmploye = ({ id, role }) => {
 
   return (
     <>
-      <input type="checkbox" id="getEmploye" className="modal-toggle" />
-      <div className="modal  ">
+      <input type="checkbox" id="getEmploye" className="modal-toggle" onChange={triggerChange} />
+      <div className="modal">
         <div className="modal-box h-1/2 flex flex-col items-center ">
           <label
             htmlFor="getEmploye"
@@ -57,15 +61,15 @@ const DetailEmploye = ({ id, role }) => {
           >
             ✕
           </label>
-          <span className="text-lg font-bold mb-4 tracking-wider flex flex-row gap-2">
+          <span className="text-lg font-bold mb-8 tracking-wider flex flex-row gap-2">
             Informasi Karyawan
-            <button
+            {/* <button
               onClick={refresh}
               className="mx-3 flex h-full w-fit p-1 items-center"
             >
               <IoMdRefreshCircle className="text-2xl" />
-            </button>
-          </span>
+            </button> */}
+          </span> 
           <div className="w-full flex items-center mb-2 pl-4 justify-evenly">
             <table className="w-11/12">
               <thead>
@@ -111,7 +115,7 @@ const DetailEmploye = ({ id, role }) => {
           <span className="w-full mt-auto flex flex-row justify-end gap-1  ">
             <button
               type="button"
-              className="btn text-sm font-medium  btn-sm  btn-error cursor-pointer shadow-lg"
+              className="btn text-sm font-medium btn-sm bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] cursor-pointer shadow-lg mr-[70px]"
               onClick={() =>
                 document.getElementById("delete_clinic").showModal()
               }
@@ -120,7 +124,7 @@ const DetailEmploye = ({ id, role }) => {
             </button>
             <button
               type="button"
-              className="btn text-sm font-medium  btn-sm btn-warning cursor-pointer shadow-lg"
+              className="btn text-sm font-medium btn-sm bg-[#FFFFFF] text-[#8AD1F2] border-[#8AD1F2] hover:bg-[#E5F3FF] cursor-pointer shadow-lg"
               onClick={() =>
                 document.getElementById("change_password").showModal()
               }
@@ -129,10 +133,10 @@ const DetailEmploye = ({ id, role }) => {
             </button>
             <button
               type="button"
-              className="btn text-sm font-medium  btn-sm  bg cursor-pointer shadow-lg"
+              className="btn text-sm bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED] font-medium btn-sm cursor-pointer shadow-lg"
                 onClick={() => document.getElementById("editEmploye").showModal()}
             >
-              Edit
+              Edit Karyawan
             </button>
           </span>
         </div>

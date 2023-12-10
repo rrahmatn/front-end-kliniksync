@@ -1,5 +1,5 @@
 import Navbar from "../../components/navbar";
-import UserModal from "../../components/userModal.";
+import UserModal from "../../components/userModal";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router";
 import { useCookies } from "react-cookie";

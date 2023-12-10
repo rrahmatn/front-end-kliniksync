@@ -74,7 +74,7 @@ export const ChangePasswordClinic = () => {
     <>
       <dialog id="changePasswordClinic" className="modal">
         <div className="lg:w-1/3 w-1/2 bg-white p-4 h-fit rounded-lg pt-1 flex flex-col items-center">
-          <div className="w-full mt-6 flex items-center ">
+          <div className="w-full mt-6 mb-2 flex items-center ">
             <h2 className=" text-xl tracking-wider m-auto ">Ganti Password </h2>
           </div>
           <div className="w-5/6 h-2/3 flex flex-col justify-between pt-5">
@@ -154,13 +154,13 @@ export const ChangePasswordClinic = () => {
                   </button>
                 </span>
               </li>
-              <span className="w-full px-4 flex flex-row gap-2 items-center justify-between">
-                <button className="btn bg w-1/2 shadow-sm" type="submit">
-                  Ubah
+              <span className="w-full px-4 flex flex-row gap-2 items-center justify-between mt-[20px] mb-[20px]">
+                <button className="btn bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED] w-1/2 shadow-sm" type="submit">
+                Ubah Password
                 </button>
                 <button
                   type="button"
-                  className="btn btn-warning shadow-sm w-1/2"
+                  className="btn bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] shadow-sm w-1/2"
                   onClick={() => {
                     formik.resetForm();
                     document.getElementById("changePasswordClinic").close();
@@ -175,7 +175,7 @@ export const ChangePasswordClinic = () => {
         {toast ? (
           <div className="toast toast-top z-[1000] toast-center">
             <div className="alert alert-success">
-              <span>Berhasil mengganti password clinic</span>
+              <span>Berhasil mengganti password Klinik</span>
             </div>
           </div>
         ) : (

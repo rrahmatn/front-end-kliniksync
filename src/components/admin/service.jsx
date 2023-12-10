@@ -151,7 +151,7 @@ export const AdminService = () => {
       return filteredServices.map((e, i) => {
         return (
           <tr
-            className="text text-sm hover:bg-violet-800 hover:text-white cursor-pointer"
+            className="text text-sm hover:bg-[#F0F0F0] cursor-pointer"
             key={i}
             onClick={() => {
               setId(e.id);
@@ -193,7 +193,7 @@ export const AdminService = () => {
                 <IoIosRefreshCircle className="text-2xl shadow-md rounded-full " />
               </span>
               <button
-                className="w-fit  flex flex-row items-center text-2xl text-[#171f1f] btn btn-sm  font-medium shadow-md  bg"
+                className="w-fit  flex flex-row items-center text-2xl btn btn-sm  font-medium shadow-md bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                 onClick={() =>
                   document.getElementById("addService").showModal()
                 }
@@ -263,7 +263,7 @@ export const AdminService = () => {
                     className="w-full h-8 ring-1 mt-2 px-3 pr-5 rounded-md shadow-md"
                     required
                   >
-                    <option value="receptionist">Pilih Type</option>
+                    <option value="default">Pilih Type</option>
                     <option value="service">Layanan</option>
                     <option value="medicine">Obat</option>
                     <option value="registration">Registrasi</option>
@@ -290,16 +290,16 @@ export const AdminService = () => {
                   />
                 </li>
               </div>
-              <div className="modal-action  flex flex-row justify-end items-center p-1 pr-2">
+              <div className="modal-action flex flex-row justify-end items-center p-1 pr-2">
                 <button
                   type="submit"
-                  className="btn btn-sm shadow-lg font-medium bg"
+                  className="btn btn-sm shadow-lg font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                 >
                   Edit
                 </button>
                 <button
                   type="button"
-                  className="btn btn-error font-medium shadow-lg  btn-sm "
+                  className="btn bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] font-medium shadow-lg  btn-sm "
                   onClick={() =>
                     document.getElementById("delete_clinic").showModal()
                   }

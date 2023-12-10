@@ -49,7 +49,7 @@ const DeleteClinic = ({ id, name , url ,modal }) => {
           </h3>
           <div className="w-full flex flex-row gap-3 mt-3 justify-end -mb-2">
             <button
-              className="btn btn-sm font-medium bg-warning"
+              className="btn btn-sm font-medium bg-[#FFFFFF] text-[#8AD1F2] border-[#8AD1F2] hover:bg-[#E5F3FF]"
               onClick={() => {
                 document.getElementById("delete_clinic").close();
               }}
@@ -57,7 +57,7 @@ const DeleteClinic = ({ id, name , url ,modal }) => {
               Batal
             </button>
             <button
-              className="btn btn-sm font-medium btn-error"
+              className="btn btn-sm font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
               onClick={deleteClinic}
             >
               {" "}

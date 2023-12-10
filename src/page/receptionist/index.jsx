@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar";
-import UserModal from "../../components/userModal.";
+import UserModal from "../../components/userModal";
   import { FiRefreshCcw } from "react-icons/fi";
 import { MdManageSearch } from "react-icons/md";
 import axios from "axios";
