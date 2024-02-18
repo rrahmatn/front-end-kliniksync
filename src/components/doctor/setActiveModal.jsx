@@ -46,7 +46,7 @@ const SetActiveModal = ({ status }) => {
           </span>
           <div className="w-full flex flex-row gap-3 mt-3 justify-end -mb-2">
             <button
-              className="btn btn-sm font-medium bg-warning"
+              className="btn btn-sm font-medium bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF]"
               onClick={() => {
                 document.getElementById("setActive").close();
               }}
@@ -55,11 +55,11 @@ const SetActiveModal = ({ status }) => {
               Batal
             </button>
             <button
-              className="btn btn-sm font-medium bg-red-500"
+              className="btn btn-sm font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
               onClick={setStatus}
             >
               {" "}
-              Lanjutkan
+              Ya
             </button>
           </div>
         </div>

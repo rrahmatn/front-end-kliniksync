@@ -30,7 +30,7 @@ const Logout = () => {
           <h3 className="font-medium text-lg">Anda yakin ingin keluar?</h3>
           <div className="w-full flex flex-row gap-3 mt-3 justify-end -mb-2">
             <button
-              className="btn btn-sm font-medium bg-warning"
+              className="btn btn-sm font-medium bg-[#FFFFFF] text-[#939597] border-[#939597] hover:bg-[#dee0e0]"
               onClick={() => {
                 document.getElementById("my_modal_2").close();
               }}
@@ -38,7 +38,7 @@ const Logout = () => {
               {" "}
               Batal
             </button>
-            <button className="btn btn-sm font-medium bg-red-500" onClick={logout}> 
+            <button className="btn btn-sm font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]" onClick={logout}> 
               {" "}
               Keluar
             </button>

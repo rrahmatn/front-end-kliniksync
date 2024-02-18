@@ -305,7 +305,7 @@ const Doctor = () => {
                           }}
                           className="text-sm  shadow-sm btn btn-xs font-medium bg hover:bg-violet-400 hover:text-zinc-900"
                         >
-                          detail
+                          Detail
                         </label>
                       </span>
                     );
@@ -395,7 +395,7 @@ const Doctor = () => {
                                     setService(e.name);
                                   }}
                                   htmlFor="addServiceForPatient"
-                                  className="h-8 bg cursor-pointer w-8 mx-auto flex items-center justify-center rounded-full text-2xl p-1 hover:bg-violet-400 hover:text-zinc-900"
+                                  className="h-8 ml-[25px] cursor-pointer w-8 mx-auto flex items-center justify-center rounded-full text-2xl p-1 bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                                 >
                                   <IoIosAddCircle />
                                 </label>
@@ -453,7 +453,7 @@ const Doctor = () => {
                       onClick={() =>
                         document.getElementById("getDone").showModal()
                       }
-                      className="w-5/6 my-3 btn bg hover:bg-violet-400 hover:text-zinc-900 "
+                      className="w-5/6 my-3 btn bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                     >
                       {" "}
                       Selesai
@@ -471,15 +471,15 @@ const Doctor = () => {
                               document.getElementById("getDone").close()
                             }
                             type="button"
-                            className="btn btn-sm font-medium bg-warning"
+                            className="btn btn-sm font-medium bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF]"
                           >
                             Batal
                           </button>
                           <button
                             type="submit"
-                            className="btn btn-sm font-medium bg-red-500"
+                            className="btn btn-sm font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                           >
-                            Lanjutkan
+                            Ya, Selesai
                           </button>
                         </div>
                       </div>

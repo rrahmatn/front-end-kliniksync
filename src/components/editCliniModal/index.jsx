@@ -225,13 +225,13 @@ const EditClinicModal = ({ id }) => {
                   </li>
                 </div>
               </div>
-              <div className="modal-action   flex flex-row justify-end items-center p-3 pr-2">
-                <button type="submit" className="btn btn-sm shadow-lg font-medium bg">
-                  Edit
+              <div className="modal-action flex flex-row justify-end items-center p-3 pr-2">
+                <button type="submit" className="btn btn-sm shadow-lg font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]">
+                  Simpan
                 </button>
                 <button
                   type="button"
-                  className="btn btn-error font-medium shadow-lg  btn-sm "
+                  className="btn bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] font-medium shadow-lg  btn-sm "
                   onClick={() => document.getElementById("my_modal_4").close()}
                 >
                   Batal

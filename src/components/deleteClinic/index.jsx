@@ -47,7 +47,7 @@ const DeleteClinic = ({ id, name , url ,modal }) => {
           <h3 className="font-medium text-lg">
             Klik lanjutkan untuk menghapus {name}{" "}
           </h3>
-          <div className="w-full flex flex-row gap-3 mt-3 justify-end -mb-2">
+          <div className="w-full flex flex-row gap-3 mt-4 justify-end mb-2">
             <button
               className="btn btn-sm font-medium bg-[#FFFFFF] text-[#8AD1F2] border-[#8AD1F2] hover:bg-[#E5F3FF]"
               onClick={() => {

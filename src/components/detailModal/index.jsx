@@ -43,6 +43,10 @@ const DetailModal = ({ id }) => {
     return false;
   };
 
+  const triggerChange = () => {
+    getClinic();
+  }
+
   useEffect(() => {
     if (id > 0) {
       getClinic();
@@ -51,7 +55,7 @@ const DetailModal = ({ id }) => {
 
   return (
     <>
-      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+      <input type="checkbox" id="my_modal_7" className="modal-toggle" onChange={triggerChange} />
       <div className="modal  ">
         <div className="modal-box h-2/3 flex flex-col items-center ">
           <label
@@ -60,12 +64,7 @@ const DetailModal = ({ id }) => {
           >
             ✕
           </label>
-          <span className="text-lg font-bold mb-4 tracking-wider flex flex-row gap-2">
-            Informasi Klinik
-            <button onClick={refresh} className="mx-3 flex h-full w-fit p-1 items-center">
-              <IoMdRefreshCircle  className="text-2xl"/>
-            </button>
-          </span>
+            <h2 className=" text-xl tracking-wider m-auto ">Informasi Klinik</h2>
           <div className="w-full flex items-center mt-1 pl-4 justify-evenly">
             <table className="w-11/12">
               <thead>
@@ -117,7 +116,7 @@ const DetailModal = ({ id }) => {
           <span className="w-full mt-auto flex flex-row justify-end gap-1  ">
             <button
               type="button"
-              className="btn text-sm font-medium btn-sm  btn-error cursor-pointer shadow-lg"
+              className="btn text-sm font-medium btn-sm cursor-pointer shadow-lg bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF]"
               onClick={() =>
                 document.getElementById("delete_clinic").showModal()
               }
@@ -127,7 +126,7 @@ const DetailModal = ({ id }) => {
             <button
               type="button"
               className={`btn text-sm font-medium btn-sm ${
-                payment !== 0 ? "btn-primary" : "btn-disabled"
+                payment !== 0 ? "btn-primary" : "btn-disabled text-[#FFFFFF]"
               }    cursor-pointer shadow-lg`}
               onClick={() => {
                 if (payment !== 0)
@@ -138,7 +137,7 @@ const DetailModal = ({ id }) => {
             </button>
             <button
               type="button"
-              className="btn text-sm font-medium btn-sm btn-warning cursor-pointer shadow-lg"
+              className="btn text-sm font-medium btn-sm cursor-pointer shadow-lg bg-[#FFFFFF] text-[#8AD1F2] border-[#8AD1F2] hover:bg-[#E5F3FF]"
               onClick={() =>
                 document.getElementById("change_password").showModal()
               }
@@ -147,7 +146,7 @@ const DetailModal = ({ id }) => {
             </button>
             <button
               type="button"
-              className="btn text-sm font-medium btn-sm  bg cursor-pointer shadow-lg"
+              className="btn text-sm font-medium btn-sm cursor-pointer shadow-lg bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
               onClick={() => document.getElementById("my_modal_4").showModal()}
             >
               Edit

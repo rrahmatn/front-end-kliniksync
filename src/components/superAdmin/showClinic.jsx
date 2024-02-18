@@ -54,8 +54,8 @@ const ShowClinic = () => {
           <h2 className="capitalize font-bold">Selamat Datang {cookies.name}</h2>
           <h2 className=" text-md ">Data Klinik </h2>
         </div>
-        <div className="w-full px-16 mb-3 shadow-sm py-1 border-b-2 flex flex-row justify-between  ">
-          <span className="w-1/3  border-2 border-separate flex flex-row justify-between px-2 items-center rounded-md shadow-md">
+        <div className="w-full px-16 mb-3 shadow-sm py-1 border-b-2 flex flex-row justify-between mt-[10px]">
+          <span className="w-1/3  border-2 border-separate flex flex-row justify-between px-2 items-center rounded-md shadow-md mb-[10px] ">
             <input
               id="search"
               type="text"
@@ -94,7 +94,7 @@ const ShowClinic = () => {
                     <td className="flex flex-row ml-auto gap-1 px-1">
                       <label
                         htmlFor="my_modal_7"
-                        className="btn text-[10px] cursor-pointer  flex items-center justify-center  text-white btn-xs bg-blue-700"
+                        className="btn text-[10px] cursor-pointer flex items-center justify-center btn-xs bg-[#FFFFFF] text-[#8AD1F2] border-[#8AD1F2] hover:bg-[#E5F3FF]"
                         onClick={() => setId(e.id)}
                       >
                         Detail

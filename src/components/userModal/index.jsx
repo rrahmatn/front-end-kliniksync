@@ -133,7 +133,7 @@ const UserModal = () => {
             >
               {error2 ? (
                 <p className="text-md text-error w-full text-center ">
-                  password salah
+                  Password Salah
                 </p>
               ) : (
                 ""

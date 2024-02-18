@@ -139,15 +139,15 @@ const AddQueue = ({ patientId, patientName }) => {
                   setDoctorId(0);
                   document.getElementById("addQueue").close();
                 }}
-                className="btn btn-sm btn-error text-slate-900 font-medium"
+                className="btn btn-sm bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] font-medium"
               >
-                batal
+                Batal
               </button>
               <button
                 onClick={handlerQueue}
-                className="btn btn-sm bg font-medium text-slate-900"
+                className="btn btn-sm bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED] font-medium"
               >
-                lanjutkan
+                Lanjutkan
               </button>
             </span>
           </div>

@@ -52,21 +52,21 @@ const AddServicePatient = ({
             ✕
           </label>
           <div className="w-full flex flex-col mb-4 pl-4 pr-3 pt-4 justify-evenly text-md">
-            Anda yakin menambahkan {serviceName} pada {patientName}
+             Anda yakin Tambahkan {serviceName} ?
           </div>
           <div className="w-full flex justify-end items-center gap-2">
+            <label
+                className="btn btn-sm text-sm  font-medium bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF]"
+                htmlFor="addServiceForPatient"
+              >
+                Batal
+            </label>
             <button
-              className="btn bg btn-sm text-sm font-medium hover:bg-violet-400 hover:text-zinc-700"
+              className="btn bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED] btn-sm text-sm font-medium "
               onClick={addServicePatient}
             >
-              tambah
+              Tambah
             </button>
-            <label
-              className="btn btn-sm text-sm  font-medium btn-warning"
-              htmlFor="addServiceForPatient"
-            >
-              BATAL
-            </label>
           </div>
         </div>
         <label className="modal-backdrop" htmlFor="addServiceForPatient">

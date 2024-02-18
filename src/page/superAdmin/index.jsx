@@ -46,8 +46,8 @@ const SuperAdmin = () => {
           </figure>
           <ul className="w-full h-fit flex flex-col mt-5  list-none">
             <li
-              className={`w-full gap-2   px-4 py-4 flex flex-row items-center hover:bg-violet-500 hover:text-white cursor-pointer ${
-                page === "showClinic" ? "bg-violet-800 text-white" : ""
+              className={`w-full gap-2   px-4 py-4 flex flex-row items-center hover:bg-[#8AD1F2] hover:text-white cursor-pointer ${
+                page === "showClinic" ? "bg-[#00A6ED] text-white" : ""
               }`}
               onClick={() => setPage("showClinic")}
             >
@@ -55,8 +55,8 @@ const SuperAdmin = () => {
               <button className="w-full h-full text-sm text-left">Dashboard</button>
             </li>
             <li
-              className={`w-full gap-2  px-4 py-4 flex flex-row items-center cursor-pointer hover:bg-violet-500 hover:text-white ${
-                page === "addClinic" ? "bg-violet-800 text-white" : ""
+              className={`w-full gap-2  px-4 py-4 flex flex-row items-center cursor-pointer hover:bg-[#8AD1F2] hover:text-white ${
+                page === "addClinic" ? "bg-[#00A6ED] text-white" : ""
               }`}
               onClick={() => setPage("addClinic")}
             >
@@ -64,8 +64,8 @@ const SuperAdmin = () => {
               <button className="w-full h-full text-sm text-left">Tambah Klinik</button>
             </li>
             <li
-              className={`w-full gap-2  px-4 py-4 flex flex-row items-center cursor-pointer hover:bg-violet-500 hover:text-white ${
-                page === "addSuperAdmin" ? "bg-violet-800 text-white" : ""
+              className={`w-full gap-2  px-4 py-4 flex flex-row items-center cursor-pointer hover:bg-[#8AD1F2] hover:text-white ${
+                page === "addSuperAdmin" ? "bg-[#00A6ED] text-white" : ""
               }`}
               onClick={() => setPage("addSuperAdmin")}
             >
@@ -73,7 +73,7 @@ const SuperAdmin = () => {
               <button className="w-full text-sm h-full text-left">Tambah Super Admin</button>
             </li>
             <li
-              className="w-full gap-2  px-4 py-4 flex flex-row items-center hover:bg-violet-500 hover:text-white cursor-pointer "
+              className="w-full gap-2  px-4 py-4 flex flex-row items-center cursor-pointer hover:bg-[#8AD1F2] hover:text-white"
               onClick={() => document.getElementById("my_modal_2").showModal()}
             >
               <IoLogOutOutline className="text-xl" />

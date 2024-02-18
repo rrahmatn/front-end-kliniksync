@@ -245,7 +245,7 @@ const Pharmacy = () => {
             </nav>
             <section className="w-full  h-full  rounded-md shadow-md flex flex-row">
               <div className="w-full h-full py-2 pt-4 text-md px-2">
-                <span className="pl-3 my-1">Tambahkan Layanan</span>
+                <span className="pl-3 my-1">Tambahkan Obat</span>
                 <span className="w-1/2 flex flex-row items-center gap-3 mt-3">
                   <input
                     id="search"
@@ -264,7 +264,7 @@ const Pharmacy = () => {
                     <thead className="sticky -top-1  border-b-2 text-bold text-black text-md m-0 bg-white  ">
                       <tr className="border-b-2">
                         <th className="p-2 w-1/12 border-b-2 px-4">No.</th>
-                        <th className="p-2 w-/full border-b-2 px-4">Layanan</th>
+                        <th className="p-2 w-/full border-b-2 px-4">Obat</th>
                         <th className="p-2 w-1/4 border-b-2 px-4">Harga</th>
                         {patient.name !== "" ? (
                           <th className="p-2 w-1/6 border-b-2 px-4">
@@ -290,7 +290,7 @@ const Pharmacy = () => {
                                     setService(e.name);
                                   }}
                                   htmlFor="addServiceForPatient"
-                                  className="h-8 bg cursor-pointer w-8 mx-auto flex items-center justify-center rounded-full text-2xl p-1 hover:bg-violet-400 hover:text-zinc-900"
+                                  className="h-8 ml-[25px] cursor-pointer w-8 mx-auto flex items-center justify-center rounded-full text-2xl p-1 bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                                 >
                                   <IoIosAddCircle />
                                 </label>
@@ -321,7 +321,7 @@ const Pharmacy = () => {
                     <li className="w-full flex flex-col gap-1">
                       <label htmlFor="note">Catatan:</label>
                       <span className="text-xs italic text-red-600">
-                        anda tidak bisa mengubah catatan dari dokter
+                        Anda tidak bisa mengubah catatan dari dokter
                       </span>
                       <textarea
                         name="note"
@@ -351,7 +351,7 @@ const Pharmacy = () => {
                       onClick={() =>
                         document.getElementById("getDonePharmacy").showModal()
                       }
-                      className="w-11/12 my-3 btn bg hover:bg-violet-400 hover:text-zinc-900 "
+                      className="w-11/12 my-3 btn bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                     >
                       {" "}
                       Selesai
@@ -360,8 +360,7 @@ const Pharmacy = () => {
                       <div className="modal-box p-4 gap-3">
                         <span className="font-medium text-lg flex flex-col gap-3 px-1">
                           <p>
-                            Anda yakin sudah selesai untuk pemeriksaan{" "}
-                            {patient.name} ?
+                            Anda yakin sudah selesai ?
                           </p>
                         </span>
                         <div className="w-full flex flex-row gap-3 mt-3 justify-end -mb-2">
@@ -370,15 +369,15 @@ const Pharmacy = () => {
                               document.getElementById("getDonePharmacy").close()
                             }
                             type="button"
-                            className="btn btn-sm font-medium bg-warning"
+                            className="btn btn-sm font-medium bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF]"
                           >
                             Batal
                           </button>
                           <button
                             type="submit"
-                            className="btn btn-sm font-medium bg-red-500"
+                            className="btn btn-sm font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
                           >
-                            Lanjutkan
+                            Ya, Selesai
                           </button>
                         </div>
                       </div>

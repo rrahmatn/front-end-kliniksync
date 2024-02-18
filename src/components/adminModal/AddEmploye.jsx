@@ -15,8 +15,8 @@ const AddEmployeModal = () => {
 
   useEffect(() => {
     if (toast) {
-      setTimeout(() => setToast(false), 5000);
-      document.getElementById("addEmploye").close()
+      setTimeout(() => setToast(false), 2000);
+      document.getElementById("addEmploye").close();
     }
   }, [toast]);
   useEffect(() => {
@@ -222,7 +222,7 @@ const AddEmployeModal = () => {
           </div>
         </div>
         {toast ? (
-          <div className="toast toast-top z-[1000] toast-center">
+          <div className="toast z-[9999999] fixed toast-top toast-center">
             <div className="alert alert-success">
               <span>Berhasil menambahkan karyawan</span>
             </div>

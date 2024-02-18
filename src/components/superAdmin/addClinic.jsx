@@ -44,7 +44,7 @@ const AddClinic = () => {
         const isPhoneNumberValid = /^\d{8,}$/.test(values.phone);
 
         if (!isPhoneNumberValid ) {
-          setError("masukan nomort telpon yang valid");
+          setError("masukkan nomor telepon yang valid");
           return;
         }
     
@@ -109,7 +109,7 @@ const AddClinic = () => {
               <div className="w-1/2 flex flex-col gap-3 items-end">
                 <li className="w-full flex flex-col  pr-4 ">
                   <label htmlFor="ininamaklinik" name="name">
-                    Nama Klnik :
+                    Nama Klinik :
                   </label>
                   <input
                     type="text"
@@ -151,7 +151,7 @@ const AddClinic = () => {
                 </li>
                 <li className="w-full flex flex-col pr-4 ">
                   <label htmlFor="phone" name="phone">
-                    No. Telp :
+                    No.Telepon :
                   </label>
                   <input
                     type="text"
@@ -262,16 +262,16 @@ const AddClinic = () => {
                 </li>
               </div>
             </div>
-            <div className="modal-action   flex flex-row justify-end items-center p-3 pr-2">
+            <div className="modal-action flex flex-row justify-end items-center p-3 pr-2">
               <button
                 type="submit"
-                className="btn btn-sm shadow-lg font-medium bg"
+                className="btn btn-sm shadow-lg font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
               >
                 Tambah Klinik
               </button>
               <button
                 type="reset"
-                className="btn btn-error font-medium shadow-lg  btn-sm "
+                className="btn bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] font-medium shadow-lg  btn-sm "
               >
                 Reset
               </button>

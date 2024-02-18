@@ -95,7 +95,7 @@ const AddPatient = () => {
               <div className="w-1/2 flex flex-col gap-3 items-end">
                 <li className="w-full flex flex-col  pr-4 ">
                   <label htmlFor="nik" name="nik">
-                    nik :
+                    NIK :
                   </label>
                   <input
                     type="text"
@@ -187,13 +187,13 @@ const AddPatient = () => {
            <div className="w-full flex flex-row justify-end px-5 pt-2">
            <button
               type="submit"
-              className="btn btn-sm shadow-lg font-medium bg"
+              className="btn btn-sm shadow-lg font-medium bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED]"
             >
               Tambah Pasien
             </button>
             <button
               type="button"
-              className="btn btn-error font-medium shadow-lg  btn-sm "
+              className="btn bg-[#FFFFFF] text-[#E64D4D] border-[#E64D4D] hover:bg-[#E64D4D] hover:text-[#FFFFFF] font-medium shadow-lg  btn-sm "
               onClick={() => {
                 document.getElementById("addPatient").close();
                 formik.setValues({
@@ -214,7 +214,7 @@ const AddPatient = () => {
       {toast2 ? (
         <div className="toast toast-top z-[1000] toast-center">
           <div className="alert alert-success">
-            <span>Berhasil menambah data pasien</span>
+            <span>Berhasil Menambah Data Pasien</span>
           </div>
         </div>
       ) : (

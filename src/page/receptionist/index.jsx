@@ -303,7 +303,7 @@ const Receptionist = () => {
               onClick={() => document.getElementById("addPatient").showModal()}
               className="btn btn-sm bg font-medium shadow-md"
             >
-              tambah pasien
+              Tambah Pasien
             </label>
           </nav>
           {selected ? (
@@ -415,7 +415,7 @@ const Receptionist = () => {
                 <div className="modal-action   flex flex-row justify-end items-center p-3 pr-2">
                   <button
                     type="submit"
-                    className="btn btn-sm shadow-lg font-medium bg"
+                    className="btn btn-sm shadow-lg font-medium bg-[#FFFFFF] text-[#8AD1F2] border-[#8AD1F2] hover:bg-[#E5F3FF]"
                   >
                     Edit Data Pasien
                   </button>
@@ -425,9 +425,9 @@ const Receptionist = () => {
                       document.getElementById("addQueue").showModal()
                     }
                     type="button"
-                    className="btn btn-error font-medium shadow-lg  btn-sm "
+                    className="btn bg-[#8AD1F2] text-[#FFFFFF] hover:bg-[#00A6ED] font-medium shadow-lg  btn-sm "
                   >
-                    Pilih antrian dokter
+                    Pilih Antrian Dokter
                   </label>
                 </div>
               </form>
@@ -435,7 +435,7 @@ const Receptionist = () => {
           ) : (
             <div className="w-full h-full flex items-center justify-center text-lg italic">
               {" "}
-              <p>silahhkan cari dan pilih data pasien terlebih dahulu</p>
+              <p>Silahhkan cari dan pilih data pasien terlebih dahulu</p>
             </div>
           )}
         </section>

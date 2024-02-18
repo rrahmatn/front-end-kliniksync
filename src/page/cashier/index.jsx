@@ -367,11 +367,11 @@ const Cashier = () => {
             />
           </li>
 
-          <button className="btn bg-amber-500 w-11/12" onClick={handlePrint}>
+          <button className="btn bg-[#55add4] text-[#FFFFFF] hover:bg-[#328bb3] w-11/12" onClick={handlePrint}>
             print
           </button>
           <button
-            className="btn bg-blue-500 w-11/12"
+            className="btn bg-[#3d9458] text-[#FFFFFF] hover:bg-[#2d8749] w-11/12"
             onClick={async () => {
               await setResult([]);
               await setServiceCounts({});
@@ -381,7 +381,7 @@ const Cashier = () => {
             {bill ? "tebus diluar" : "tebus obat"}
           </button>
           <button
-            className="btn bg w-11/12"
+            className="btn bg-[#dc3545] text-[#FFFFFF] hover:bg-[#c82333] w-11/12"
             onClick={() => {
               getDone();
               getQueue();
